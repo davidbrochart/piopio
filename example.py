@@ -1,12 +1,12 @@
-from piopio import pio, push_code
-
-def bar(x):
-    return 'PyPy is saying ' + x + ' !!!'
+from piopio import pio
 
 @pio
-def foo(x):
-    return bar(x)
+def fib(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fib(n - 1) + fib(n - 2)
 
-push_code(bar)
-for i in range(10):
-    print(foo(str(i)))
+print(fib(40))

@@ -3,26 +3,29 @@ Python Input Output
 
 Offload Python code to another Python interpreter - typically PyPy.
 
-piopio sends function code and arguments to a PyPy process, and gets the results back. Its main purpose is execution speed up, but it can also be useful for executing Python2 code into a Python3 program.
+piopio sends function code and arguments to a PyPy process, and gets the results back. Its main purpose is execution speed up, but it can also be useful for executing Python2 code inside a Python3 program.
 
 General Usage
 ---------------
 
 It mimics Numba's `@jit` decorator. The function you want to offload to PyPy is decorated with `@pio`.
 
-
 ```python
 from piopio import pio
 
 @pio
-def foo(x):
-    return 'PyPy is saying ' + x + ' !!!'
+def fib(n):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fib(n - 1) + fib(n - 2)
 
-for i in range(10):
-    print(foo(str(i)))
+print(fib(40))
 ```
 
-The `foo` function will be offloaded to PyPy.
+With the `@pio` decorator, the `fib` function will be offloaded to PyPy and computed quite quickly. Try commenting out the decorator!
 
 Limitations
 -------------
