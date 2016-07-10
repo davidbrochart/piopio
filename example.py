@@ -1,12 +1,12 @@
-from piopio import pio
+from piopio import pio, push_code
+
+def bar(x):
+    return 'PyPy is saying ' + x + ' !!!'
 
 @pio
 def foo(x):
-    import time
-    time.sleep(1)
-    return 'PyPy is saying ' + x + ' !!!'
+    return bar(x)
 
-i = 0
-while True:
+push_code(bar)
+for i in range(10):
     print(foo(str(i)))
-    i += 1
